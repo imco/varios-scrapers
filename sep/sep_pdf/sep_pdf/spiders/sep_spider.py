@@ -9,7 +9,6 @@ import re
 import string
 import sys
 
-
 class SepSpider201301(CrawlSpider):
 	name = 'sep_crawler_gral'
 	allowed_domains = ["sep.gob.mx"]
@@ -39,6 +38,8 @@ class SepSpider201301(CrawlSpider):
 		item = SepPdfItem()
 		archivos = []
 		sites = sel.xpath('//div[@id="content"]/p')
+		if len(sites)==0:
+			sites = sel.xpath('//div[@id="interna_colIzquierda"]/p')
 		item['url'] = response.url
 		for site in sites:
 			title = site.xpath('a/text()').extract()
